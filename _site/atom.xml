@@ -4,13 +4,32 @@
  <title>Coding Snippets</title>
  <link href="http://crshnburn.github.io/atom.xml" rel="self"/>
  <link href="http://crshnburn.github.io/"/>
- <updated>2014-08-11T21:51:17+01:00</updated>
+ <updated>2014-08-11T22:22:52+01:00</updated>
  <id>http://crshnburn.github.io</id>
  <author>
    <name>Andrew Smithson</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Connecting to a self signed cert from iOS</title>
+   <link href="http://crshnburn.github.io/2014/08/11/self-signed-certs-ios/"/>
+   <updated>2014-08-11T00:00:00+01:00</updated>
+   <id>http://crshnburn.github.io/2014/08/11/self-signed-certs-ios</id>
+   <content type="html">&lt;p&gt;One of the key advantages of SSL/HTTPS is that the certificate authority (CA) functionality means you don&amp;#39;t need to manage a certificate for every server you want to connect to.&lt;/p&gt;
+
+&lt;p&gt;On the downside, if you have a test server you don&amp;#39;t want to go to the expense of getting an externally signed certificate when there may be only one user, so you resort to a self-signed certificate.&lt;/p&gt;
+
+&lt;p&gt;By default iOS applications will not connect to these servers over HTTPS but with the following snippet added to the bottom of your &lt;code&gt;AppDelegate.m&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objc&quot; data-lang=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;NSURLRequest&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;(DataController)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;allowsAnyHTTPSCertificateForHost:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
  
 
 </feed>
