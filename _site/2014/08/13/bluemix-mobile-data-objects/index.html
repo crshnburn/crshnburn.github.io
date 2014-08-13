@@ -11,7 +11,7 @@
 
   <title>
     
-      Coding Snippets &middot; Code snippets that come in useful
+      Creating objects to store in Bluemix Mobile Data &middot; Coding Snippets
     
   </title>
 
@@ -44,7 +44,7 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">Home</a>
+      <a class="sidebar-nav-item" href="/">Home</a>
 
       
 
@@ -76,18 +76,10 @@
 
 
     <div class="content container">
-      <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2014/08/13/bluemix-mobile-data-objects/">
-        Creating objects to store in Bluemix Mobile Data
-      </a>
-    </h1>
-
-    <span class="post-date">13 Aug 2014</span>
-
-    <p>Using IBM <a href="http://bluemix.net">Bluemix</a> to create mobile applications provides a great service for storing data in the cloud.</p>
+      <div class="post">
+  <h1 class="post-title">Creating objects to store in Bluemix Mobile Data</h1>
+  <span class="post-date">13 Aug 2014</span>
+  <p>Using IBM <a href="http://bluemix.net">Bluemix</a> to create mobile applications provides a great service for storing data in the cloud.</p>
 
 <p>Below is how I set-up my own objects to be stored:</p>
 
@@ -123,41 +115,24 @@
 </code></pre></div>
 <p>This object can then be used with any of the API calls that add or retrieve data from the database.</p>
 
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2014/08/11/self-signed-certs-ios/">
-        Connecting to a self signed cert from iOS
-      </a>
-    </h1>
-
-    <span class="post-date">11 Aug 2014</span>
-
-    <p>One of the key advantages of SSL/HTTPS is that the certificate authority (CA) functionality means you don&#39;t need to manage a certificate for every server you want to connect to.</p>
-
-<p>On the downside, if you have a test server you don&#39;t want to go to the expense of getting an externally signed certificate when there may be only one user, so you resort to a self-signed certificate.</p>
-
-<p>By default iOS applications will not connect to these servers over HTTPS but with the following snippet added to the bottom of your <code>AppDelegate.m</code> file.</p>
-<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@implementation</span> <span class="bp">NSURLRequest</span><span class="nl">(DataController)</span>
-<span class="p">+</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">allowsAnyHTTPSCertificateForHost:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">host</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</code></pre></div>
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-    <span class="pagination-item older">Older</span>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/08/11/self-signed-certs-ios/">
+            Connecting to a self signed cert from iOS
+            <small>11 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
+
     </div>
 
   </body>
