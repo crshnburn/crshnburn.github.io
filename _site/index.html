@@ -80,6 +80,46 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/2014/10/07/simple-java-producer-consumer/">
+        Simple Java Producer/Consumer
+      </a>
+    </h1>
+
+    <span class="post-date">07 Oct 2014</span>
+
+    <p>For a recent project I needed to have a some data stored in a remote database but having this happen on the main processing thread introduced too much of a delay.</p>
+
+<p>To counter this the slow part needed to be moved off to another thread but retain a way to communicate with the main thread. This was done using the <code>ArrayBlockingQueue</code> class to store the data objects until they&#39;re ready to be processed.</p>
+
+<p>The main thread that is producing the data can then put an object on the queue using the <code>put</code> method. This will block if the queue is full, so if this is likely to be a problem due to slow processing by the consumer the size of the queue will need to be made big enough to accomodate this.</p>
+
+<p>The Consumer thread that is then started can loop forever and wait on the <code>take</code> method of the queue until some data is <code>put</code> there and then do the processing to store it in the remote database.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/08/21/sig11-in-cics-program/">
+        Signal 11 in CICS program
+      </a>
+    </h1>
+
+    <span class="post-date">21 Aug 2014</span>
+
+    <p>I&#39;ve dusted off my CICS programming skills for a small project and while trying to debug a problem using the <code>resp</code> and <code>resp2</code> codes from an <code>exec cics</code> call, the program starting terminating with a signal 11.</p>
+
+<p>As it turns out I&#39;d forgotten a crucial line of code to add at the start of the main function
+<code>c
+exec cics address eib(dfheiptr);
+</code>
+which sets up the required pointers to access the response codes.</p>
+
+<p>Without this line the translated code attempts to dereference a <code>NULL</code> pointer and you end up in the same mess I did, with signal 11 termination of the program.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/2014/08/13/bluemix-mobile-data-objects/">
         Creating objects to store in Bluemix Mobile Data
       </a>
@@ -89,7 +129,7 @@
 
     <p>Using IBM <a href="http://bluemix.net">Bluemix</a> to create mobile applications provides a great service for storing data in the cloud.</p>
 
-<p>Below is how I set-up my own objects to be stored:</p>
+<p>Below is how I set-up my own objects to be stored from an iPhone app:</p>
 
 <ul>
 <li>Create a new Objective-C object that extends <code>IBMDataObject</code> and implements <code>IBMDataObjectSpecialization</code></li>

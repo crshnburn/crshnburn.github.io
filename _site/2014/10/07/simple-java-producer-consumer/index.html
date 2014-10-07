@@ -11,7 +11,7 @@
 
   <title>
     
-      Connecting to a self signed cert from iOS &middot; Coding Snippets
+      Simple Java Producer/Consumer &middot; Coding Snippets
     
   </title>
 
@@ -77,34 +77,21 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Connecting to a self signed cert from iOS</h1>
-  <span class="post-date">11 Aug 2014</span>
-  <p>One of the key advantages of SSL/HTTPS is that the certificate authority (CA) functionality means you don&#39;t need to manage a certificate for every server you want to connect to.</p>
+  <h1 class="post-title">Simple Java Producer/Consumer</h1>
+  <span class="post-date">07 Oct 2014</span>
+  <p>For a recent project I needed to have a some data stored in a remote database but having this happen on the main processing thread introduced too much of a delay.</p>
 
-<p>On the downside, if you have a test server you don&#39;t want to go to the expense of getting an externally signed certificate when there may be only one user, so you resort to a self-signed certificate.</p>
+<p>To counter this the slow part needed to be moved off to another thread but retain a way to communicate with the main thread. This was done using the <code>ArrayBlockingQueue</code> class to store the data objects until they&#39;re ready to be processed.</p>
 
-<p>By default iOS applications will not connect to these servers over HTTPS but with the following snippet added to the bottom of your <code>AppDelegate.m</code> file.</p>
-<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@implementation</span> <span class="bp">NSURLRequest</span><span class="nl">(DataController)</span>
-<span class="p">+</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">allowsAnyHTTPSCertificateForHost:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">host</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</code></pre></div>
+<p>The main thread that is producing the data can then put an object on the queue using the <code>put</code> method. This will block if the queue is full, so if this is likely to be a problem due to slow processing by the consumer the size of the queue will need to be made big enough to accomodate this.</p>
+
+<p>The Consumer thread that is then started can loop forever and wait on the <code>take</code> method of the queue until some data is <code>put</code> there and then do the processing to store it in the remote database.</p>
+
 </div>
 
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
-    
-      <li>
-        <h3>
-          <a href="/2014/10/07/simple-java-producer-consumer/">
-            Simple Java Producer/Consumer
-            <small>07 Oct 2014</small>
-          </a>
-        </h3>
-      </li>
     
       <li>
         <h3>
@@ -120,6 +107,15 @@
           <a href="/2014/08/13/bluemix-mobile-data-objects/">
             Creating objects to store in Bluemix Mobile Data
             <small>13 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/11/self-signed-certs-ios/">
+            Connecting to a self signed cert from iOS
+            <small>11 Aug 2014</small>
           </a>
         </h3>
       </li>

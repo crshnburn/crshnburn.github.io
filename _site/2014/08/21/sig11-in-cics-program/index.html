@@ -11,7 +11,7 @@
 
   <title>
     
-      Connecting to a self signed cert from iOS &middot; Coding Snippets
+      Signal 11 in CICS program &middot; Coding Snippets
     
   </title>
 
@@ -77,20 +77,18 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Connecting to a self signed cert from iOS</h1>
-  <span class="post-date">11 Aug 2014</span>
-  <p>One of the key advantages of SSL/HTTPS is that the certificate authority (CA) functionality means you don&#39;t need to manage a certificate for every server you want to connect to.</p>
+  <h1 class="post-title">Signal 11 in CICS program</h1>
+  <span class="post-date">21 Aug 2014</span>
+  <p>I&#39;ve dusted off my CICS programming skills for a small project and while trying to debug a problem using the <code>resp</code> and <code>resp2</code> codes from an <code>exec cics</code> call, the program starting terminating with a signal 11.</p>
 
-<p>On the downside, if you have a test server you don&#39;t want to go to the expense of getting an externally signed certificate when there may be only one user, so you resort to a self-signed certificate.</p>
+<p>As it turns out I&#39;d forgotten a crucial line of code to add at the start of the main function
+<code>c
+exec cics address eib(dfheiptr);
+</code>
+which sets up the required pointers to access the response codes.</p>
 
-<p>By default iOS applications will not connect to these servers over HTTPS but with the following snippet added to the bottom of your <code>AppDelegate.m</code> file.</p>
-<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@implementation</span> <span class="bp">NSURLRequest</span><span class="nl">(DataController)</span>
-<span class="p">+</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">allowsAnyHTTPSCertificateForHost:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">host</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</code></pre></div>
+<p>Without this line the translated code attempts to dereference a <code>NULL</code> pointer and you end up in the same mess I did, with signal 11 termination of the program.</p>
+
 </div>
 
 <div class="related">
@@ -108,18 +106,18 @@
     
       <li>
         <h3>
-          <a href="/2014/08/21/sig11-in-cics-program/">
-            Signal 11 in CICS program
-            <small>21 Aug 2014</small>
+          <a href="/2014/08/13/bluemix-mobile-data-objects/">
+            Creating objects to store in Bluemix Mobile Data
+            <small>13 Aug 2014</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/2014/08/13/bluemix-mobile-data-objects/">
-            Creating objects to store in Bluemix Mobile Data
-            <small>13 Aug 2014</small>
+          <a href="/2014/08/11/self-signed-certs-ios/">
+            Connecting to a self signed cert from iOS
+            <small>11 Aug 2014</small>
           </a>
         </h3>
       </li>
