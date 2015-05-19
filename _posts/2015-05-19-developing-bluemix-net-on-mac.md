@@ -7,14 +7,14 @@ The new .NET buildpack for Bluemix allows for ASP.NET applications to be run in 
 
 ####Creating the application
 
-1. Install the .NET execution environment following the instructions
-2. Get a copy of Visual Studio Code
-3. Create a new .NET application in Bluemix and add the code to an IBM DevOps project as described here
+1. Install the .NET execution environment following the [instructions](https://github.com/aspnet/home#os-x)
+2. Get a copy of [Visual Studio Code](https://code.visualstudio.com)
+3. Create a new .NET application in Bluemix and add the code to an IBM DevOps project as described [here](https://developer.ibm.com/bluemix/2015/05/18/getting-started-asp-net-5-bluemix/)
 4. Clone the git repository
 
 ####Running locally
 
-Normally at this stage you would perform a `dnu restore` and `dnx . web-kestrel` in the directory containing the `project.json` and the application would be running locally. However in this case it produces an error because the buildpack is based on Beta3 and by default on OSX you get Beta4. Fortunately help is at hand thanks to Microsoft's work with Docker and making images available there. The following Dockerfile will produce an image that is equivalent of what it running in Bluemix.
+Normally at this stage you would perform a `dnu restore` and `dnx . web-kestrel` in the directory containing the `project.json` and the application would be running locally. However in this case it produces an error because the buildpack is based on Beta3 and by default on OSX you get Beta4. Fortunately help is at hand thanks to Microsoft's work with Docker and making [images available](https://registry.hub.docker.com/u/microsoft/aspnet/) there is a solution. The following Dockerfile will produce an image that is equivalent of what it running in Bluemix.
 
 ```
 FROM microsoft/aspnet:1.0.0-beta3
